@@ -1,5 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { supabaseServer } from "@/lib/supabase/server";
@@ -10,7 +11,13 @@ import { STAGES } from "@/lib/deals";
 
 const cred = z.object({ email: z.string().email(), password: z.string().min(8, "Password must be at least 8 characters") });
 const q = (m: string) => encodeURIComponent(m);
-const site = () => process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Use the real request origin so email links open the site the user is on (never a stale localhost).
+async function site() {
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  if (host) return `${h.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https")}://${host}`;
+  return process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+}
 
 export async function signIn(fd: FormData) {
   const p = cred.safeParse(Object.fromEntries(fd));
@@ -24,7 +31,7 @@ export async function signUp(fd: FormData) {
   const p = cred.safeParse(Object.fromEntries(fd));
   if (!p.success) redirect(`/signup?error=${q(p.error.issues[0].message)}`);
   const sb = await supabaseServer();
-  const { data, error } = await sb.auth.signUp({ ...p.data, options: { emailRedirectTo: `${site()}/auth/callback` } });
+  const { data, error } = await sb.auth.signUp({ ...p.data, options: { emailRedirectTo: `${await site()}/auth/callback` } });
   if (error) redirect(`/signup?error=${q(error.message)}`);
   if (!data.session) redirect(`/login?notice=${q("Check your email to confirm your account, then sign in.")}`);
   redirect("/app");
@@ -33,7 +40,7 @@ export async function forgot(fd: FormData) {
   const email = z.string().email().safeParse(fd.get("email"));
   if (!email.success) redirect(`/forgot?error=${q("Enter a valid email")}`);
   const sb = await supabaseServer();
-  await sb.auth.resetPasswordForEmail(email.data, { redirectTo: `${site()}/auth/callback?next=/app/settings` });
+  await sb.auth.resetPasswordForEmail(email.data, { redirectTo: `${await site()}/auth/callback?next=/app/settings` });
   redirect(`/forgot?notice=${q("If that account exists, a reset link is on its way.")}`);
 }
 

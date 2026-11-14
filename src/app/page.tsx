@@ -58,21 +58,12 @@ export default function Home() {
   return (
     <Marketing>
       <section className="bg-gradient-to-br from-violet-50 via-violet-100 to-pink-400/30">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 md:grid-cols-2 md:py-28">
-          <div>
-            <Eyebrow>Revenue intelligence</Eyebrow>
-            <h1 className="text-4xl font-bold uppercase leading-tight md:text-6xl">Know where every deal is heading</h1>
-            <p className="mt-6 max-w-xl text-lg text-ink/80">CallCompass turns your sales conversations into measurable call metrics, honest deal health and a forecast your team can trust.</p>
-            <div className="mt-8 flex flex-wrap gap-3"><Link href="/signup" className="btn-pink">Start free</Link><Link href="/product" className="btn-ghost">Explore the product</Link></div>
-            <p className="mt-4 text-sm text-ink/60">Free plan includes 5 calls a month. No card required.</p>
-          </div>
-          <Mock title="Example call · Discovery">
-            <div className="grid grid-cols-3 gap-3 text-center">
-              {[["57%", "Rep talk"], ["9", "Questions"], ["Yes", "Next step"]].map(([v, l]) => <div key={l} className="rounded-xl bg-violet-50 p-3"><p className="font-display text-2xl font-bold">{v}</p><p className="text-xs text-ink/70">{l}</p></div>)}
-            </div>
-            <Bar pct={57} label="Rep talk share" />
-            <p className="rounded-lg bg-amber-50 p-3"><strong>Risk flagged:</strong> “legal must approve” — no owner or date agreed.</p>
-          </Mock>
+        <div className="mx-auto max-w-5xl px-4 py-20 text-center md:py-28">
+          <Eyebrow>Know where every deal is heading</Eyebrow>
+          <h1 className="mx-auto max-w-4xl text-4xl font-black uppercase leading-tight md:text-6xl">AI revenue intelligence for sales teams, businesses and companies</h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-ink/80">CallCompass turns your sales conversations into measurable call metrics, honest deal health and a forecast your team can trust.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup" className="btn-pink">Start free</Link><Link href="/product" className="btn-ghost">Explore the product</Link></div>
+          <p className="mt-4 text-sm text-ink/60">Free plan includes 5 calls a month. No card required.</p>
         </div>
       </section>
 
