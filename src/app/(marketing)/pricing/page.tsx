@@ -5,7 +5,7 @@ import { PLANS, type PlanId } from "@/lib/plans";
 export const metadata = { title: "Pricing — CallCompass" };
 const rows: [string, string, string, string][] = [
   ["Calls per month", "5", "50", "500"], ["Calculated call metrics", "✓", "✓", "✓"], ["Deal tracker and health scores", "✓", "✓", "✓"],
-  ["Pipeline forecast", "✓", "✓", "✓"], ["Coaching scorecards", "✓", "✓", "✓"], ["AI summaries, objections and risks", "—", "✓", "✓"],
+  ["Pipeline forecast", "✓", "✓", "✓"], ["Coaching scorecards", "✓", "✓", "✓"], ["Unlimited deals tracked", "✓", "✓", "✓"], ["Objections with quoted evidence", "—", "✓", "✓"], ["Priority analysis", "—", "—", "✓"], ["Support", "Glossary", "Email", "Priority email"], ["AI summaries, objections and risks", "—", "✓", "✓"],
 ];
 export default function Pricing() {
   return (
@@ -21,7 +21,7 @@ export default function Pricing() {
               {id === "starter" && <p className="mb-2 text-xs font-bold uppercase tracking-wide text-pink-600">Most popular</p>}
               <h2 className="text-xl font-bold">{p.name}</h2><p className="mt-1 font-display text-4xl font-bold">{p.price}</p><p className="mt-2 text-sm text-ink/80">{p.blurb}</p>
               <ul className="mt-4 flex-1 space-y-1 text-sm">{p.features.map((f) => <li key={f}>✓ {f}</li>)}</ul>
-              <Link href="/signup" className={`${id === "starter" ? "btn-pink" : "btn-ghost"} mt-5`}>{id === "free" ? "Start free" : "Sign up, then upgrade"}</Link>
+              {id === "free" ? <Link href="/signup" className="btn-ghost mt-5">Start free</Link> : <a href={p.link} target="_blank" rel="noopener noreferrer" className={`${id === "starter" ? "btn-pink" : "btn-ghost"} mt-5`}>Get {p.name}</a>}
             </div>); })}
         </div>
         <div className="card mt-10 overflow-x-auto"><table className="w-full text-left text-sm"><caption className="mb-3 text-left font-display text-xl font-bold">Compare plans</caption>
@@ -30,7 +30,7 @@ export default function Pricing() {
       </Section>
       <Section tint>
         <Eyebrow>Billing questions</Eyebrow><h2 className="text-3xl font-bold uppercase">Good to know</h2>
-        <Faq items={[["How do I upgrade?", "Sign in, open Billing and choose a plan. You will be taken to a secure payment page."], ["When does my plan change?", "After the payment is confirmed on our side. Returning from the payment page does not change your plan by itself."], ["What happens at my call limit?", "Adding more calls is blocked until next month or until you upgrade. Existing calls stay available."], ["Can I cancel?", "Yes. When a subscription is cancelled, the workspace returns to the free plan and your data is kept."]]} />
+        <Faq items={[["How do I upgrade?", "Choose Navigator or Captain on this page and complete checkout on the secure payment page. Use the same email as your CallCompass account so we can match your payment."], ["When does my plan change?", "After the payment is confirmed on our side. Returning from the payment page does not change your plan by itself."], ["What happens at my call limit?", "Adding more calls is blocked until next month or until you upgrade. Existing calls stay available."], ["Can I cancel?", "Yes. When a subscription is cancelled, the workspace returns to the free plan and your data is kept."]]} />
       </Section>
       <CtaBand />
     </Marketing>

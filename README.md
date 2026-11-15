@@ -9,7 +9,7 @@ Revenue intelligence from sales calls. Next.js 15, Supabase, Gemini.
 4. `npm run dev`
 
 ## Billing
-Set `NEXT_PUBLIC_PAYMENT_LINK_STARTER` / `_GROWTH`. Links get `client_reference_id=<org id>` appended. After a verified payment, your automation must `POST /api/billing/webhook` with header `x-webhook-secret: $BILLING_WEBHOOK_SECRET` and JSON `{"org_id","plan":"starter|growth","status":"active|past_due|canceled"}`. Returning from checkout does not change the plan.
+Set `NEXT_PUBLIC_PAYMENT_LINK_STARTER` / `_GROWTH`. Default links are the Selar checkout pages ($47 and $97); Billing-page links also append `client_reference_id=<org id>`. After a verified payment, your automation must `POST /api/billing/webhook` with header `x-webhook-secret: $BILLING_WEBHOOK_SECRET` and JSON `{"org_id","plan":"starter|growth","status":"active|past_due|canceled"}`. Returning from checkout does not change the plan.
 
 ## Vercel
 Import the repo, add every variable from `.env.example` (keep `SUPABASE_SERVICE_ROLE_KEY`, `GEMINI_API_KEY`, `BILLING_WEBHOOK_SECRET` server-only), set `NEXT_PUBLIC_SITE_URL` to the production URL, deploy.

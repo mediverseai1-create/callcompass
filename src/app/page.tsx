@@ -174,7 +174,7 @@ export default function Home() {
         <Eyebrow>Plans</Eyebrow>
         <h2 className="text-3xl font-bold uppercase md:text-4xl">Start free, grow when you are ready</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {[["Explorer", "$0", "5 calls a month with calculated metrics, deals and forecast."], ["Navigator", "$49/mo", "50 calls a month plus AI summaries, risks and action items."], ["Captain", "$149/mo", "500 calls a month for teams with a weekly review cadence."]].map(([n, p, d]) => <div key={n} className="card"><h3 className="text-xl font-bold">{n}</h3><p className="font-display text-3xl font-bold">{p}</p><p className="mt-2 text-sm text-ink/80">{d}</p></div>)}
+          {[["Explorer", "$0", "5 calls a month with calculated metrics, deals and forecast."], ["Navigator", "$47/mo", "50 calls a month plus AI summaries, risks and action items."], ["Captain", "$97/mo", "500 calls a month for teams with a weekly review cadence."]].map(([n, p, d]) => <div key={n} className="card"><h3 className="text-xl font-bold">{n}</h3><p className="font-display text-3xl font-bold">{p}</p><p className="mt-2 text-sm text-ink/80">{d}</p></div>)}
         </div>
         <Link href="/pricing" className="btn-pink mt-6">Compare plans</Link>
       </Section>
